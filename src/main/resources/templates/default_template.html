@@ -1,0 +1,115 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>SISEAN</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta content="Système Intégré de Suivi Evaluation sur l’Eau et l’Assainissement au Niger (SISEAN)" name="description" />
+		<meta content="MINISTERE DE L’HYDRAULIQUE ET DE L’ASSAINISSEMENT" name="author" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="shortcut icon" href="assets/images/favicon.png">
+		
+		<link href="/assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+		
+		<link href="/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+		<link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+		<link href="/assets/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+	</head>
+    <body data-layout="horizontal">
+        <!-- Begin page -->
+        <div id="wrapper" style="height: auto;">
+            <!-- Navigation Bar-->
+            <header id="topnav">
+                <!-- Topbar Start -->
+                <div class="navbar-custom" style="background: #007ec3;">
+                    <div class="container-fluid" style="max-width:100%">		
+                        <ul class="list-unstyled topnav-menu float-right mb-0">
+                            <li class="dropdown notification-list">
+                                <!-- Mobile menu toggle-->
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                                <!-- End mobile menu toggle-->
+                            </li>
+							
+							<div id="navigation" th:if = "${horizontalMenu}">
+								<div th:replace="${horizontalMenu} :: horizontalMenu"> </div>
+							</div>
+							 
+                        </ul>
+                        <div class="logo-box">
+                            <a href="/" class="logo text-center">
+                                <span class="logo-lg">
+                                        <img src="assets/images/logo-light.png">
+                                </span>
+                                <span class="logo-sm">
+                                <!--  <img src="assets/images/logo-sm.png" alt="" height="22">-->
+                                
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="content-page">
+				<nav  aria-label="breadcrumb" th:if = "${breadCrumb}"> 
+					<div th:replace="${breadCrumb} :: breadcrumb"> </div>
+				</nav>
+                <div class="content" style="min-height: 100px;">
+                    <div class="container-fluid" style="max-width: 100%">
+						<div th:replace="${view_path} :: page_content">
+							<div class="row">
+								<div class="col-12 col-sm-6 col-lg-4">
+									<div class="card">
+										<div class="clearfix p-3 card-body">
+											<i class="fa fa-laptop bg-primary p-3 font-2xl mr-3 float-left" style="color: #fff;font-size: 1.5rem !important;"></i>
+											<div class="text-primary" style="font-size:1.09375rem;">Suivi des Investissements Publics</div>
+											<div class="text-muted text-uppercase font-weight-bold font-xs">Plateforme centrale</div>
+										</div>
+										<div class="px-3 py-2 card-footer" style="background-color: #f0f3f5;border-top: 1px solid #c8ced3;">
+											<a class="font-weight-bold font-xs btn-block text-muted" data-plateforme="central-pip" href="#">Se connecter<i class="fa fa-angle-right float-right font-lg"></i></a>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+                    <footer class="footer" style="text-align: left">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Niger &copy; 2020 <a href="#">Ministère de l'Hydraulique et de l'Assainissement</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        
+        <script src="/assets/js/vendor.min.js"></script>
+        <script src="/assets/js/app.min.js"></script>
+        <script src="/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+         <script src="/assets/libs/bootstrap-filestyle2/bootstrap-filestyle.min.js"></script>
+         <script src="/assets/js/bootstrap-select.min.js"></script>
+         
+         <script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="assets/js/pages/datatables.init.js"></script>
+        <script src="/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+        <script src="/assets/libs/datatables/dataTables.responsive.min.js"></script>
+        <script src="/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+        <script src="/assets/js/script.js"></script>
+
+    </body>
+</html>
+                        
+                    

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div th:fragment="page_content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="jumbotron">
+					<div class="container">
+					  <h1 class="display-3" th:text="#{erreur.erreur-403.titre}"></h1>
+					  <p th:text="#{erreur.erreur-403.corp}"></p>
+					  <p><a class="btn btn-primary btn-lg" href="#" role="button" th:text="#{erreur.lirePlus}"></a></p>
+					</div>
+				  </div>
+				  <br/><br/>
+			</div>
+		</div>
+    </div>
+</body>
+</html>

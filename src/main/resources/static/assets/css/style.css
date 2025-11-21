@@ -1,0 +1,35 @@
+.card{
+      margin-bottom :0px;
+      margin: 5px;
+   }
+ 
+ .card-header{
+     padding:2px;
+     padding-left:5px;
+   }
+   
+.menu_vertical .card-body{
+     padding:0px;
+     padding-left:5px;
+   }
+   
+.bootstrap-select > .dropdown-toggle{
+   	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+   }
+ 
+ .table th {
+ 	padding: .75rem;
+    vertical-align: top;
+ }  
+ .table td{
+ 	padding: .25rem;
+ 	padding-left: .50rem;
+    vertical-align: middle;
+ }
+ .float-right{
+ margin-right:10px;
+ }

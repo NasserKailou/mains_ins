@@ -1,0 +1,11 @@
+"Validité 2 (deux) ans du " + 
+    new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date()) + 
+    " au " + 
+    new java.text.SimpleDateFormat("dd/MM/yyyy").format(
+        new java.util.GregorianCalendar(
+            new java.util.GregorianCalendar().get(java.util.Calendar.YEAR) + 2,
+            new java.util.GregorianCalendar().get(java.util.Calendar.MONTH),
+            new java.util.GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)
+        ).getTime()
+    )
+    

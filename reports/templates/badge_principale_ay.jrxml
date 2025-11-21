@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="badge_principale" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="265" columnSpacing="20" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="eb9992bc-ee4f-422c-9b66-fee277bf2f3a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="templates\MAINS.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select * from public.v_adherent_ayant_droit 
+where is_ok_for_printing is true and matricule in (select matricule from public.v_adherent where age <60 ) order by matricule]]>
+	</queryString>
+	<field name="id_adherent" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id_adherent"/>
+	</field>
+	<field name="nom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nom_ad"/>
+	</field>
+	<field name="prenom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="prenom_ad"/>
+	</field>
+	<field name="sexe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sexe"/>
+	</field>
+	<field name="fonction" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fonction"/>
+	</field>
+	<field name="date_naiss_adherent" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="date_naiss_adherent"/>
+	</field>
+	<field name="date_prise_service" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="date_prise_service"/>
+	</field>
+	<field name="picture_adherent" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="picture_adherent"/>
+	</field>
+	<field name="direction" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="direction"/>
+	</field>
+	<field name="division" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="division"/>
+	</field>
+	<field name="service" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="service"/>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+	</field>
+	<field name="matricule" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="matricule"/>
+	</field>
+	<field name="structure" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="structure"/>
+	</field>
+	<field name="structure_sigle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="structure_sigle"/>
+	</field>
+	<field name="code_programme" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="code_programme"/>
+	</field>
+	<field name="categorie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categorie"/>
+	</field>
+	<field name="is_ok_for_printing" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="is_ok_for_printing"/>
+	</field>
+	<field name="id_ayant_droit" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id_ayant_droit"/>
+	</field>
+	<field name="nom_ay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nom_ay"/>
+	</field>
+	<field name="date_naiss_ayant_droit" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="date_naiss_ayant_droit"/>
+	</field>
+	<field name="age_adherent" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="age_adherent"/>
+	</field>
+	<field name="age" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="adherent" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="adherent"/>
+	</field>
+	<field name="picture_ayant_droit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="picture_ayant_droit"/>
+	</field>
+	<field name="lien" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lien"/>
+	</field>
+	<field name="genre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="genre"/>
+	</field>
+	<group name="Groupe1">
+		<groupExpression><![CDATA[$F{matricule}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="150" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="10" width="265" height="140" uuid="46a5ae10-ca24-43e5-bb23-be61c72d7fa9"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id_ayant_droit}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["badge_ayantdroit.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

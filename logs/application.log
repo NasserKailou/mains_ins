@@ -1,0 +1,21 @@
+2025-11-14 14:21:54 [34mINFO [0;39m [36mplay.api.db.DefaultDBApi[0;39m [35m[0;39m Database [default] initialized
+2025-11-14 14:21:54 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m Creating Pool for datasource 'default'
+2025-11-14 14:21:54 [31mWARN [0;39m [36mplay.api.http.HttpConfiguration[0;39m [35m[0;39m 
+Your secret key is very short, and may be vulnerable to dictionary attacks.  Your application may not be secure.
+The application secret should ideally be 32 bytes of completely random input, encoded in base64. While the application
+will be able to start in production mode, you will also see a warning when it is starting.
+To set the application secret, please read http://playframework.com/documentation/latest/ApplicationSecret
+          
+2025-11-14 14:21:54 [34mINFO [0;39m [36mplay.api.http.EnabledFilters[0;39m [35m[0;39m Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2025-11-14 14:21:54 [34mINFO [0;39m [36mplay.api.Play[0;39m [35m[0;39m Application started (Dev) (no global state)
+2025-11-14 14:25:45 [34mINFO [0;39m [36mp.a.i.l.c.CoordinatedShutdownSupport[0;39m [35m[0;39m Starting synchronous coordinated shutdown with ServerStoppedReason reason and 35000 milliseconds timeout
+2025-11-14 14:25:45 [34mINFO [0;39m [36mplay.core.server.AkkaHttpServer[0;39m [35m[0;39m Stopping Akka HTTP server...
+2025-11-14 14:25:45 [34mINFO [0;39m [36mplay.core.server.AkkaHttpServer[0;39m [35m[0;39m Terminating server binding for /0:0:0:0:0:0:0:0:9000
+2025-11-14 14:25:45 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m Shutting down connection pool.
+2025-11-14 14:25:45 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m Shutting down connection pool.
+2025-11-14 14:25:45 [34mINFO [0;39m [36mplay.core.server.AkkaHttpServer[0;39m [35m[0;39m Running provided shutdown stop hooks

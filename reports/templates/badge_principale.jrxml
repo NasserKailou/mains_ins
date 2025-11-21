@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="badge_principale" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="265" columnSpacing="20" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="eb9992bc-ee4f-422c-9b66-fee277bf2f3a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="templates\MAINS.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT * FROM public.v_adherent_badges where age < 60 and is_ok_for_printing is true and is_member is true ORDER BY id;]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="nom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nom_ad"/>
+	</field>
+	<field name="prenom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="prenom_ad"/>
+	</field>
+	<field name="sexe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sexe"/>
+	</field>
+	<field name="matricule" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="matricule"/>
+	</field>
+	<field name="categorie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categorie"/>
+	</field>
+	<field name="fonction" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fonction"/>
+	</field>
+	<field name="structure_sigle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="structure_sigle"/>
+	</field>
+	<field name="date_naiss" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="date_naiss"/>
+	</field>
+	<field name="age" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="date_prise_service" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="date_prise_service"/>
+	</field>
+	<field name="anciennete" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="anciennete"/>
+	</field>
+	<field name="picture" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="picture"/>
+	</field>
+	<field name="when_done" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="when_done"/>
+	</field>
+	<field name="who_done" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="who_done"/>
+	</field>
+	<field name="on_deleted" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="on_deleted"/>
+	</field>
+	<field name="is_ok_for_printing" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="is_ok_for_printing"/>
+	</field>
+	<field name="is_member" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="is_member"/>
+	</field>
+	<field name="direction" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direction"/>
+	</field>
+	<field name="division" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="division"/>
+	</field>
+	<field name="service" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="service"/>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+	</field>
+	<group name="Groupe1">
+		<groupExpression><![CDATA[$F{matricule}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="150" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="10" width="265" height="140" uuid="46a5ae10-ca24-43e5-bb23-be61c72d7fa9"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["badge_adherent.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

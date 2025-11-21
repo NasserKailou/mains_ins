@@ -1,0 +1,2 @@
+INSERT INTO public.users(login, droit, etat, passe, who_done, when_done, nom_prenom)
+	 (select telephone,'Adherent',true,'$2a$08$PRxqH5TtmbXS3LIw7Hbc1.YzhPacabeu4ZnAYlQ74CKADRqWq.McW','Admin_mutuel','2021-07-29',nom_ad ||'-'|| prenom_ad from public.adherent);

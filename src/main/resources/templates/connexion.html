@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div th:fragment="page_content" style="margin-top: 30px">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2">
+				<div class="panel card panel-fill">
+					<div class="card-header" style="padding-left: 20px;">
+						<h5 class="font-16 m-1">Connexion</h5>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/login}" method="post">
+	                        <div class="form-group">
+	                            <label for="username">Email ou N°Téléphone<span class="text-danger">*</span></label>
+	                            <input type="text" name="username" required class="form-control">
+	                        </div>
+	                        <div class="form-group">
+	                            <label for="password">Mot de passe<span class="text-danger">*</span></label>
+	                            <input type="password" name="password" required class="form-control">
+	                        </div>
+	                        <div class="form-group text-right mb-0">
+	                            <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+	                                Valider
+	                            </button>
+	                            <button type="reset" class="btn btn-danger waves-effect">
+	                                Annuler
+	                            </button>
+	                        </div>
+	
+	                    </form>
+					</div>
+				</div>
+				<br/><br/>
+			</div>
+
+		</div>
+    </div>
+</body>
+</html>

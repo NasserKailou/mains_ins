@@ -1,0 +1,14 @@
+<image scaleImage="FillFrame">
+    <reportElement x="0" y="31" width="63" height="60" uuid="f186fc98-fa9e-4f95-8e7e-b6d153d6bd0a"/>
+    <imageExpression><![CDATA["C:/photos/" + $F{picture}]]></imageExpression>
+</image>
+
+
+<image scaleImage="FillFrame">
+    <reportElement x="0" y="31" width="63" height="60" uuid="f186fc98-fa9e-4f95-8e7e-b6d153d6bd0a"/>
+    <imageExpression><![CDATA[
+        ($F{picture} == null || $F{picture}.trim().equals("")) 
+        ? "C:/images/default.png"   // image par défaut
+        : $F{picture}               // chemin de la photo en base
+    ]]></imageExpression>
+</image>

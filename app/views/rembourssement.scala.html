@@ -1,0 +1,340 @@
+@import java.time.LocalDateTime
+@import helper._
+@import java.util
+@import utils._
+@(viewMode:String,  reglements: List[models.tables.pojos.VReglement],
+ reglement: models.tables.pojos.Reglement,adherent: models.tables.pojos.Adherent, structures: List[models.tables.pojos.StructurePartenaire],
+ totalRegler: Long,plafondAnnuel: Long, typePrestations: List[models.tables.pojos.TypePrestation], ayantDroits: List[models.tables.pojos.VAdherentAyantDroit])(implicit request: Http.Request)
+
+@main("Rembourssement"){
+
+
+<hr>
+<div class="card-header" id="titre_header">
+	<div class="row">
+
+	<form  method="POST" name="form" action="@controllers.routes.ReglementCtrl.save() "  class="form-horizontal col-md-12 col-sm-12 col-xs-12" role="form">
+			@helper.CSRF.formField
+			<input value="@viewMode"           name="viewMode" type="hidden">
+			<input value="@adherent.getId()" name="adherent" type="hidden">
+			<input value="@reglement.getId()" name="id" type="hidden">
+			<center>
+			<fieldset style=" color:#000; width:100%; background-color:#DDE7E9; border-radius:10px; font-size:14px;"  >
+			<br>
+
+					<h6 style="color:#000;">
+						<strong>
+							<i>Tous les champs avec <font style="color:red;  font-size:14px;">*</font> sont obligatoires</i>
+						</strong>
+					</h6>
+			<div  class="row ">
+			   
+			    @if(adherent !=null){
+			     <div class="col-md-12"><h5><u style="color: blue;"><b>Adhérent Matricule n°@adherent.getMatricule(), de @adherent.getNomAd  @adherent.getPrenomAd - @adherent.getTelephone(), </b></u> </h5>
+			     <u style="color: green;"><h4>Le total des payement est de :@totalRegler F CFA </</h4></u></div>
+			     @if(totalRegler > plafondAnnuel){<u style="color: red;"><h4>Vous êtes en situation de dépassement, le total à remboursser à la mutuelle est de :@(totalRegler-plafondAnnuel) F CFA </</h4></u></div>}
+				}
+		@if((viewMode.equals("CREATE") || viewMode.equals("EDIT") || viewMode.equals("DELETE")) && (request.session.get("droit").get() == "Admin" || request.session.get("droit").get() == "SuperAdmin" || request.session.get("droit").get() == "Agent Saisie" || request.session.get("droit").get() == "Comptable")){ 
+				<div class="col-md-12">
+
+						<br>
+						<div class="form-group row">
+						  <label class="col-sm-1 col-form-label" for="libelle" ><b>Ref Facture<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								<input type="text" id="refFacture"  name="refFacture" autocomplete="off" value="@reglement.getRefFacture()"
+											placeholder="reference de la facture a regler" @if( viewMode.equals("DELETE")){ disabled=disabled}
+											class="form-control autocomplete"
+											required="required"  />
+						  	</div>
+						  	
+						  	
+						  	 <label class="col-sm-1 col-form-label" for="nom" ><b>Bénéficiare :<font style="color:red;  font-size:12px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								
+                            	<select class="form-control" required="required" id="benef" @if(viewMode.equals("DELETE")){readonly}  name="benef">
+	                                	<option value="">Selectionner le béneficiare</option>
+	                                	<option value="@adherent.getId()"  >@adherent.getNomAd @adherent.getPrenomAd</option>
+	                                @for(c<-ayantDroits){
+	                               			 <option value="@c.getIdAyantDroit()"  @if(reglement.getAdherent()== c.getIdAdherent() || reglement.getAyantDroit == c.getIdAyantDroit ){ selected="selected" }>@c.getNomAy</option>
+	                                }
+                            </select>
+						  	</div>
+						  	
+						  	
+						  	 <label class="col-sm-1 col-form-label" for="nom" ><b>T.presation :<font style="color:red;  font-size:12px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								
+                            	<select class="form-control" required="required" id="tprestation" @if(viewMode.equals("DELETE")){readonly}  name="typePrestation">
+	                                	<option value="">Selectionner le type de prestation</option>
+	                                @for(c<-typePrestations){
+	                               			 <option value="@c.getId()" @if(reglement.getTypePrestation()== c.getId()){ selected="selected" } >@c.getPrestation -- @c.getCouverture()% </option>
+	                                }
+                            </select>
+						  	</div>
+						  	
+						  	
+						  	
+						  	<!--  <label class="col-sm-1 col-form-label" for="libelle" ><b>Montant<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input type="number" id="montant"  name="montant" autocomplete="off" value="@@reglement.getMontant()"
+											placeholder="montant de la facture a regler" @if( viewMode.equals("DELETE")){ disabled=disabled}
+											class="form-control autocomplete"
+											required="required"  />
+						  	</div> -->
+						  	
+						  	<div class="form-group row">
+						  
+						  	
+						  	 	  <label class="col-sm-1 col-form-label" for="nom" ><b>Structure :<font style="color:red;  font-size:12px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								
+                            	<select class="form-control" required="required" id="structure" @if(viewMode.equals("DELETE")){readonly}  name="structure">
+	                                	<option value="">Selectionner la Structure</option>
+	                                @for(c<-structures){
+	                               			 <option value="@c.getId()"  @if(reglement.getStructure()== c.getId()){ selected="selected" }>@c.getLibelle</option>
+	                               			
+	                                }
+                            </select>
+						  	</div>
+						
+						  	
+						  	 
+						  	@if( viewMode.equals("CREATE")) {
+						<label class="col-sm-1 col-form-label" for="nom" ><b>Date de Payement<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								<input value="" name="tmpDate" type="date" placeholder="JJ/MM/AAAA" class="form-control" required="required">
+						  	 </div>
+						  	 }
+						  	 
+						 @if( viewMode.equals("EDIT") && reglement.getDatePayement() !=null){ 
+						<label class="col-sm-1 col-form-label" for="nom" ><b>Date de Prochain RDV<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								<input value="@reglement.getDatePayement().format("yyyy-MM-dd")" 
+								name="tmpDate" type="date" @if(reglement.getDatePayement()!=null){ selected="selected"} required="required">
+						  	 </div>
+						  	 }
+						  	 
+						  	 
+						  	  @if( viewMode.equals("DELETE")){ 
+						<label class="col-sm-1 col-form-label" for="nom" ><b>Date de Prochain RDV<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								<input value="@reglement.getDatePayement().format("yyyy-MM-dd")" 
+								name="tmpDate" type="date" @if(reglement.getDatePayement()!=null){ selected="selected"} @if(viewMode.equals("DELETE")){readonly}>
+						  	 </div>
+						  	 }
+				</div>
+
+			
+				</div>
+				
+				<div class="form-group row">
+					 <label class="col-sm-3 col-form-label" for="libelle" ><b>Si Rembourssement en espèces, Présicsez la structure émettrice de la facture<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input type="text" id="refFacture"  name="structureEmettriceRembourssement" autocomplete="on" value="@reglement.getStructureEmettriceRembourssement()"
+											placeholder="Présicsez la structure émettrice de la facture" @if( viewMode.equals("DELETE")){ disabled=disabled}
+											class="form-control autocomplete"/>
+						  	</div>
+						  	
+						  	<label class="col-sm-2 col-form-label" for="libelle" ><b>Numéro de Téléphone<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input type="text" id="refFacture"  name="telStructureEmettrice" autocomplete="on" value="@reglement.getTelStructureEmettrice()"
+											placeholder="N° Téléphone de la structure émettrice de la facture" @if( viewMode.equals("DELETE")){ disabled=disabled}
+											class="form-control autocomplete" />
+						  	</div>
+						  	
+				</div>
+			<div class="row" style="color:#000;">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+				<button class="btn btn-primary" type="submit"  name="Annuler" value="Retour" onclick="history.go(-1)">Retour</button>
+					@if( viewMode.equals("CREATE")){ 
+					<button class="btn btn-success" type="submit" id="valider" name="Valider" title="Valider(Enregistrer les informations)" >
+						<i class="glyphicon glyphicon-save"></i> Enregistrer
+					</button> } 
+					@if( viewMode.equals("EDIT")){ 
+					<button class="btn btn-warning" type="submit" id="valider" name="Valider" title="Valider(Modifier les informations)">
+						<i class="glyphicon glyphicon-edit"></i> Modifier
+					</button> } 
+					@if( viewMode.equals("TRAITER")){ 
+					<button class="btn btn-success" type="submit" id="valider" name="Valider" title="Valider(Enregistrer les informations)" >
+						<i class="glyphicon glyphicon-save"></i> Valider 
+					</button> } 
+					@if( viewMode.equals("DELETE")){ 
+					<button class="btn btn-danger" type="submit" id="valider"
+					 name="Valider" title="Supprimer l'examen"  onclick="return window.confirm('Voulez vous supprimer cet payement?');">
+						<i class="glyphicon glyphicon-edit"></i> Supprimer
+					</button> } 
+				}
+<!-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 				<button class="btn btn-danger" type="submit"  name="Annuler" value="Annuler">Annuler</button> -->
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<br>
+			</fieldset></center>
+			<br>
+		</form>
+	</div>
+	
+</div>
+<hr>
+<section class="container">
+	
+	<div class="row">
+
+		<div class = "col-md-12 table-responsive">
+		
+				<table class="dta-tbl table table-bordered table-striped text-center" >
+				<center><div class="badged-title"><h4> <b>L</b>istes des reglements de l'Adhérent<br></div></center>
+					<thead>
+						 <tr>
+							
+							<th style="text-align: center"><b>Ref Facture</b></th>
+							<th style="text-align: center"><b>Montant</b></th>
+							<th style="text-align: center"><b>M_Couvert</b></th>
+							<th style="text-align: center"><b>M_Payer</b></th>
+							<th style="text-align: center"><b>Structure</b></th>
+							<th style="text-align: center"><b>Date de Reglement</b></th>
+							
+							<th style="text-align: center"><b>Action</b></th>
+						 </tr>
+					 </thead>
+					 <tbody>
+						@for(c <-reglements){
+							 <tr>
+							  <td>@c.getRefFacture() </td>
+								<td>@c.getMontantTotal()</td>
+								<td>@c.getMontantReglement()</td>
+								<td>@c.getMontantPaye()</td>
+								<td>@c.getStructure()</td>
+							
+								<td>@c.getDatePayement().format("yyyy-MM-dd") </td>
+								
+								<td>
+								@if(request.session.get("droit").get() == "SuperAdmin" || request.session.get("droit").get() == "Comptable" || request.session.get("droit").get() == "Admin"){
+								  <a id="btnReadWrite" class="btn btn-primary" title="Modification"
+									href="@controllers.routes.ReglementCtrl.show("EDIT", c.getId(), c.getIdAdherent()) " ><i class="glyphicon glyphicon-edit"></i></a>
+									}
+									@if(request.session.get("droit").get() == "SuperAdmin"){	
+                                    <a id="btnDelete" class="btn btn-danger"
+                                       title="Supprimer"
+                                       href="@controllers.routes.ReglementCtrl.show("DELETE", c.getId(), c.getIdAdherent())""><i class="glyphicon glyphicon-trash"></i></a>
+                               }
+                               	
+                               <a id="btnReadWrite" class="btn btn-info" title="Voir détails" data-toggle="modal" data-target="#exampleModal@c.getId()"
+									 ><i class="glyphicon glyphicon-eye-open"></i></a>
+									 @if(request.session.get("droit").get() == "SuperAdmin" || request.session.get("droit").get() == "Admin" || request.session.get("droit").get() == "Agent Saisie" || request.session.get("droit").get() == "Comptable" ){
+									 <a id="btnReadWrite" class="btn btn-success" title="Lignes"
+									href="@controllers.routes.ReglementCtrl.reglementDetailForm("CREATE", c.getId(), c.getIdAdherent(),0L) " ><i class="glyphicon glyphicon-list"></i></a>
+									}
+                                </td>
+							 </tr>
+							}
+					  </tbody>
+				</table>
+				
+	
+		</div>
+	</div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+@for(c <-reglements){
+<div class="modal fade" id="exampleModal@c.getId()" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered"  width="100%" cellspacing="0">
+ 
+							
+      				<tr>
+      				<th>Nom & prénom adherent</th>
+      				<th style="color: green; font-size: 20px"  colspan="3">
+      				@c.getNomAd()--@c.getPrenomAd()      				</th>
+      				</tr>
+      				<tr>
+      				<th>Bénéficiare</th>
+      				<th style="color: green; font-size: 20px" colspan="3">
+      				@if(null != c.getAyantDroit){ @c.getNomAy()--@c.getLien()}else{@c.getNomAd()--@c.getPrenomAd()}     			
+      					</th>
+      				</tr>      				
+      				<tr>
+      				<th>Réf</th>
+      				<th style="color: green; font-size: 20px" >
+      				@c.getRefFacture() 
+    				</th>
+                    <th>T.prestaion</th>
+      				<th style="color: green; font-size: 20px">@c.getPrestation()</th>
+      				</tr>
+      				<tr>
+      				<th>Structure</th>
+      				<th style="color: green; font-size: 20px">@c.getStructure</th>
+                    <th>Date payement</th>
+                    <th style="color: green; font-size: 20px">@c.getDatePayement().format("yyyy-MM-dd") </th>
+      				</tr>
+      				<tr>
+      				<th>Montant Total de la Facture</th>
+      				<th style="color: green; font-size: 20px">@c.getMontantTotal() (En F CFA)</th>
+                    <th>Montant à payer</th>
+                    <th style="color: green; font-size: 20px">@c.getMontantPaye() En  F CFA</th>
+      				</tr>
+      				<th>Montant Reglement (pris en charge)</th>
+      				<th style="color: green; font-size: 20px" colspan="3">@c.getMontantReglement() (En  F CFA)</th>
+      				</tr>
+      			
+                   
+        </table>          
+                  
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+
+
+<script >
+function openPopup(target, x, y, w, h) {
+	var win = window.open(target, 'popup', 'height='+h+', width='+w+', top='+y+', left='+x+', toolbar=no, menubar=yes, location=no, resizable=yes, scrollbars=yes, status=no');
+	win.window.focus();
+	return false;
+}
+
+
+
+</script>
+

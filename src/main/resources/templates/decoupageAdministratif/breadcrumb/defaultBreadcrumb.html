@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+	</head>
+	<body >
+		<div th:fragment="breadcrumb"> 
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#/" th:text="#{accueil}"></a></li>
+				<li class="active breadcrumb-item" aria-current="page" th:text="#{decoupageAdministratif}"></li>
+			</ol>
+		</div>
+	</body>
+</html>

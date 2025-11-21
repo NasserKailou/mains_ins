@@ -1,0 +1,1 @@
+alter table public.type_prestation add column on_deleted boolean default false;

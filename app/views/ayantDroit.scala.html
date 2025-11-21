@@ -1,0 +1,219 @@
+@import java.time.LocalDateTime
+@import helper._
+@import java.util
+@import views.html.utils._
+@(viewMode:String,  ayantDroits: List[models.tables.pojos.VAyantDroit],
+ ayantDroit: models.tables.pojos.AyantDroit,adherent: models.tables.pojos.Adherent)(implicit request: Http.Request)
+
+@main("Ayants Droits"){
+
+<hr>
+<div class="card-header" id="titre_header">
+	<div class="row">
+
+	<form  method="POST" name="form" action="@controllers.routes.AyantDroitCtrl.save() "  class="form-horizontal col-md-12 col-sm-12 col-xs-12" role="form">
+			@helper.CSRF.formField
+			<input value="@viewMode"           name="viewMode" type="hidden">
+			<input value="@adherent.getId()" name="adherent" type="hidden">
+			<input value="@ayantDroit.getId()" name="id" type="hidden">
+			<input value="@ayantDroit.getPicture()" name="picture" type="hidden">
+			<center>
+			<fieldset style=" color:#000; width:98%; background-color:#DDE7E9; border-radius:10px; font-size:14px;"  >
+			<br>
+
+					<h6 style="color:#000;">
+						<strong>
+							<i>Tous les champs avec <font style="color:red;  font-size:14px;">*</font> sont obligatoires</i>
+						</strong>
+					</h6>
+			<div  class="row ">
+			    <div class="col-md-12"><h4><u style="color: red;"><b>Informations Ayant Droit</b></u> </h4></div>
+			    @if(adherent !=null){
+			     <div class="col-md-12"><h5><u style="color: blue;"><b>Adhérent Matricule n°@adherent.getMatricule(), de @adherent.getNomAd  @adherent.getPrenomAd - @adherent.getTelephone() </b></u> </h5></div>
+				}
+				<div class="col-md-12">
+
+						<br>
+						<div class="form-group row">
+						  <label class="col-sm-1 col-form-label" for="libelle" ><b>Nom<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input type="text" id="libelle"  name="nomAy" autocomplete="off" value="@ayantDroit.getNomAy()"
+											placeholder="nom de l'ayant droit" @if( viewMode.equals("DELETE")){ disabled=disabled}
+											class="form-control autocomplete"
+											required="required"  />
+						  	</div>
+						  	
+						  	<div class="form-group row">
+						  
+						  	
+						  	 <label class="col-sm-1 col-form-label" for="libelle" ><b>Genre<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-1">
+								<select class="form-control" required="required" id="genre" @if(viewMode.equals("DELETE")){readonly}  name="genre">
+	                                	<option value="">Selectionner le genre</option>
+	                              		<option value="MASCULIN" @if(ayantDroit.getGenre()=="MASCULIN"){ selected="selected"} >MASCULIN</option>
+	                              		<option value="FEMININ" @if(ayantDroit.getGenre()=="FEMININ"){ selected="selected"} >FEMININ</option>
+	                               	
+	                               	</select>		
+	                              
+						  	</div>
+						  	
+						  	 <label class="col-sm-1 col-form-label" for="libelle" ><b>Lien<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<select class="form-control" required="required" id="genre" @if(viewMode.equals("DELETE")){readonly}  name="lien">
+	                                	<option value="" >Selectionner le lien</option>
+	                              		<option value="CONJOINT" @if(ayantDroit.getLien()=="CONJOINT"){ selected="selected"}>CONJOINT(E)</option>
+	                              		<option value="ENFANT" @if(ayantDroit.getLien()=="ENFANT"){ selected="selected"}>ENFANT</option>
+	                               	
+	                               </select>		
+	                              
+						  	</div>
+						  	
+						  	
+						  	   @if( viewMode.equals("EDIT") || viewMode.equals("DELETE") ){ 
+						  	 <label class="col-sm-1 col-form-label" for="nom" ><b>Date de Naissance<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input value="@ayantDroit.getDateNaiss().format("yyyy-MM-dd")" name="tmpDate" type="date" placeholder="JJ/MM/AAAA" class="form-control" required="required">
+						  	 </div>
+						  	 
+					 	
+						  	 }
+						  	 
+						  	  @if( viewMode.equals("CREATE") ){ 
+						  	 
+						  	 <label class="col-sm-1 col-form-label" for="nom" ><b>Date de Naissance<font style="color:red;  font-size:14px;">*:</font></b></label>
+						  	<div class="col-sm-2">
+								<input value="" name="tmpDate" type="date" placeholder="JJ/MM/AAAA" class="form-control" required="required">
+						  	 </div>
+					 	
+						  	 }
+						  	 
+						
+				</div>
+
+			
+				</div>
+			<div class="row" style="color:#000;">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+				<button class="btn btn-primary" type="submit"  name="Annuler" value="Retour" onclick="history.go(-1)">Retour</button>
+					@if( viewMode.equals("CREATE")){ 
+					@if(request.session.get("droit").get() == "Admin"  || request.session.get("droit").get() == "SuperAdmin"){ 
+					<button class="btn btn-success" type="submit" id="valider" name="Valider" title="Valider(Enregistrer les informations)" >
+						<i class="glyphicon glyphicon-save"></i> Enregistrer
+					</button> } 
+					} 
+					@if( viewMode.equals("EDIT")){ 
+					<button class="btn btn-warning" type="submit" id="valider" name="Valider" title="Valider(Modifier les informations)">
+						<i class="glyphicon glyphicon-edit"></i> Modifier
+					</button> } 
+					@if( viewMode.equals("TRAITER")){ 
+					<button class="btn btn-success" type="submit" id="valider" name="Valider" title="Valider(Enregistrer les informations)" >
+						<i class="glyphicon glyphicon-save"></i> Valider 
+					</button> } 
+					@if( viewMode.equals("DELETE")){ 
+					<button class="btn btn-danger" type="submit" id="valider"
+					 name="Valider" title="Supprimer l'examen"  onclick="return window.confirm('Voulez vous supprimer cet examen?');">
+						<i class="glyphicon glyphicon-edit"></i> Supprimer
+					</button> } 
+					
+<!-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 				<button class="btn btn-danger" type="submit"  name="Annuler" value="Annuler">Annuler</button> -->
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<br>
+			</fieldset></center>
+			<br>
+		</form>
+	</div>
+	
+</div>
+<hr>
+<section class="container">
+	
+	<div class="row">
+@if(!ayantDroits.isEmpty()) {
+		
+	}
+		<div class = "col-md-12 table-responsive">
+		
+				<table class="dta-tbl table table-bordered table-striped text-center" >
+				<center><div class="badged-title"><h4> <b>L</b>istes des ayants droits de l'Adhérent<br></div></center>
+					<thead>
+						 <tr>
+							<th style="text-align: center"><b>#</b></th>
+							<th style="text-align: center"><b>Nom</b></th>
+							<th style="text-align: center"><b>Genre</b></th>
+							<th style="text-align: center"><b>Lien</b></th>
+							<th style="text-align: center"><b>Date de Naissance</b></th>
+							<th style="text-align: center"><b>Age</b></th>
+							<th style="text-align: center"><b>Status</b></th>
+							<th style="text-align: center"><b>Photo</b></th>
+							<th style="text-align: center"><b>Action</b></th>
+						 </tr>
+					 </thead>
+					 <tbody>
+						@for(c <-ayantDroits){
+							
+							 <tr>
+							 <td><img  src="@controllers.routes.AyantDroitCtrl.path(c.getPicture())"  class=" circle adherantImage"></td>
+							  <td>@c.getNomAy() </td>
+								<td>@c.getGenre() </td>
+								<td>@c.getLien() </td>
+							
+								<td>@c.getDateNaiss().format("yyyy-MM-dd") </td>
+								<td>@c.getAge() ans </td>
+							
+								<td>@if(c.getAge() >= 25 && c.getLien().equals("ENFANT")){<label class="btn btn-danger">Non pris en charge,age dépassé!!!</label>}else{<label class="btn btn-success">Pris en charge</label>}</td>
+								<td>
+								<a class="btn btn-info" type="button" title="Inserer photo profil" href="@controllers.routes.AyantDroitCtrl.formProfil(c.getId())">
+						                              	<i class="glyphicon glyphicon-user"></i> </a>
+								</td>						
+								
+								<td>
+								  <a id="btnReadWrite" class="btn btn-primary" title="Modification"
+									href="@controllers.routes.AyantDroitCtrl.show("EDIT", c.getId(), c.getAdherent()) " ><i class="glyphicon glyphicon-edit"></i></a>
+									@if(request.session.get("droit").get() == "Admin" || request.session.get("droit").get() == "SuperAdmin" ){	|
+                                    <a id="btnDelete" class="btn btn-danger"
+                                       title="Supprimer"
+                                       href="@controllers.routes.AyantDroitCtrl.show("DELETE", c.getId(), c.getAdherent())""><i class="glyphicon glyphicon-trash"></i></a>
+
+									   |
+									   <a class="btn btn-primary" type="button" title="Imprimer la carte d'accès du bénéficiaire"
+								 href="@controllers.routes.AyantDroitCtrl.printCarte(c.getId(),"badge_ayantdroit")" onclick="return(openPopup(this.href, 600, 600, 600, 600));">
+						                              	<i class="glyphicon glyphicon-user"></i> </a>
+                               }
+
+							   	@if(request.session.get("droit").get() == "AGENT_CARD_ID" || request.session.get("droit").get() == "SuperAdmin" || request.session.get("droit").get() == "Admin"){	|
+                                 
+									   <a class="btn btn-success" type="button" title="Imprimer la carte d'accès du bénéficiaire"
+								 href="@controllers.routes.AyantDroitCtrl.printCarte(c.getId(),"badge_ayantdroit")" onclick="return(openPopup(this.href, 600, 600, 600, 600));">
+						                              	<i class="glyphicon glyphicon-credit-card"></i> </a>
+                               }
+                                </td>
+							 </tr>
+							}
+					  </tbody>
+				</table>
+				
+	
+		</div>
+	</div>
+  </section>
+  
+  
+  
+}
+
+
+<script >
+function openPopup(target, x, y, w, h) {
+	var win = window.open(target, 'popup', 'height='+h+', width='+w+', top='+y+', left='+x+', toolbar=no, menubar=yes, location=no, resizable=yes, scrollbars=yes, status=no');
+	win.window.focus();
+	return false;
+}
+
+
+
+</script>
+

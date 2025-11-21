@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div th:fragment="operationStatus">    
+	    <div class="alert alert-icon alert-success text-success alert-dismissible fade show" role="alert">
+	        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	            <span aria-hidden="true">&times;</span>
+	        </button>
+	        <i class="mdi mdi-information"></i>
+	         <span th:text="#{operationStatus.success}"></span>
+	    </div>
+    </div>
+
+</body>
+</html>

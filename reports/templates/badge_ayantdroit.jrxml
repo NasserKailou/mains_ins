@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Carte_adherent" pageWidth="242" pageHeight="153" orientation="Landscape" columnWidth="202" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="ba66a30d-7da9-4a1e-8ece-fd6020623f39">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="templates\MAINS.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="252"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="737"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+	FROM public.v_adherent_ayant_droit where id_ayant_droit::character varying = $P{id} ;]]>
+	</queryString>
+	<field name="id_adherent" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id_adherent"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_adherent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="nom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom_ad"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom_ad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="prenom_ad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="prenom_ad"/>
+		<property name="com.jaspersoft.studio.field.label" value="prenom_ad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="sexe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sexe"/>
+		<property name="com.jaspersoft.studio.field.label" value="sexe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="fonction" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fonction"/>
+		<property name="com.jaspersoft.studio.field.label" value="fonction"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="date_naiss_adherent" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="date_naiss_adherent"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_naiss_adherent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="date_prise_service" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="date_prise_service"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_prise_service"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="picture_adherent" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="picture_adherent"/>
+		<property name="com.jaspersoft.studio.field.label" value="picture_adherent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="direction" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="direction"/>
+		<property name="com.jaspersoft.studio.field.label" value="direction"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="division" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="division"/>
+		<property name="com.jaspersoft.studio.field.label" value="division"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="service" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="service"/>
+		<property name="com.jaspersoft.studio.field.label" value="service"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telephone"/>
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="matricule" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="matricule"/>
+		<property name="com.jaspersoft.studio.field.label" value="matricule"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="structure" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="structure"/>
+		<property name="com.jaspersoft.studio.field.label" value="structure"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="structure_sigle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="structure_sigle"/>
+		<property name="com.jaspersoft.studio.field.label" value="structure_sigle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="code_programme" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="code_programme"/>
+		<property name="com.jaspersoft.studio.field.label" value="code_programme"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="categorie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="categorie"/>
+		<property name="com.jaspersoft.studio.field.label" value="categorie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="id_ayant_droit" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="nom_ay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom_ay"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom_ay"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="date_naiss_ayant_droit" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="date_naiss_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_naiss_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="age" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="age"/>
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="adherent" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="adherent"/>
+		<property name="com.jaspersoft.studio.field.label" value="adherent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="picture_ayant_droit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="picture_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.label" value="picture_ayant_droit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="lien" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lien"/>
+		<property name="com.jaspersoft.studio.field.label" value="lien"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<field name="genre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="genre"/>
+		<property name="com.jaspersoft.studio.field.label" value="genre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="v_adherent_ayant_droit"/>
+	</field>
+	<group name="adherent" footerPosition="CollateAtBottom">
+		<groupExpression><![CDATA[$F{matricule}]]></groupExpression>
+		<groupHeader>
+			<band height="133">
+				<property name="com.jaspersoft.studio.layout"/>
+				<rectangle>
+					<reportElement stretchType="ElementGroupHeight" mode="Opaque" x="-20" y="-20" width="242" height="153" backcolor="#FAFFFA" uuid="59db01d5-05ce-4618-a679-edfb0d4f0de8"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<image scaleImage="FillFrame">
+					<reportElement x="170" y="-17" width="49" height="42" uuid="a1fbab95-5005-4157-ba4f-01a35b08be1e"/>
+					<graphicElement fill="Solid"/>
+					<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
+				</image>
+				<image scaleImage="FillFrame">
+					<reportElement x="0" y="27" width="58" height="60" uuid="f186fc98-fa9e-4f95-8e7e-b6d153d6bd0a"/>
+					<imageExpression><![CDATA[($F{picture_ayant_droit} == null || $F{picture_ayant_droit}.trim().equals("")) ? "M3.png": $F{picture_ayant_droit}]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="-20" y="-20" width="19" height="153" backcolor="rgba(217, 217, 217, 0.7647059)" uuid="2374468f-2f13-4327-a8bf-bc583be037ea"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Carte d'accès MAINS]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="170" y="73" width="52" height="59" uuid="3bf8f5e4-92ba-4c04-96ad-1017a7d8118c"/>
+					<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:codeExpression><![CDATA["Mutuelle de Santé des angents (MAINS) de L'INS/Niger  © Tout droit Reservé \n, Adhérent  :"+$F{nom_ad} +" "+ $F{prenom_ad}+" , Matricule/N° Assuré(e): " + $F{matricule} +".  "+"Cette carte est la propriété exclusive de la MAINS. Elle permet à son détenteur d’accéder aux différents services prévus à cet effet auprès des structures partenaires. En cas de perte, prière à toute personne l’ayant retrouvée de bien vouloir contacter la MAINS aux numéros suivants : 86979069 / 90413363 / 96386538."]]></jr:codeExpression>
+					</jr:QRCode>
+				</componentElement>
+				<image scaleImage="FillFrame">
+					<reportElement x="-1" y="-20" width="51" height="45" uuid="9a3e7883-249a-46d4-8997-1995a31fe93c"/>
+					<graphicElement fill="Solid"/>
+					<imageExpression><![CDATA["ins.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="40" y="-20" width="134" height="37" uuid="5c67bdf0-5094-4be7-9217-c0107471f6f5"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="false" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Republique du Niger
+Ministère de l'Economie et des Finances
+Institut National de la Statistique
+Mutuelle de Santé des Agents de l'INS]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="-1" y="117" width="191" height="9" uuid="bee32aaf-4143-42d6-aca0-ad7956676c39"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Validité deux (2) ans du 01/01/2026 au 31/12/2027"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="61" y="17" width="135" height="17" uuid="dd9a618d-1a82-4a77-9ed3-399845a19883"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Bénéficiare]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="61" y="31" width="158" height="14" uuid="9ca40d17-ecc9-48c9-9f07-a10118077aec"/>
+					<textElement verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Prénom : " +$F{nom_ay}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="61" y="45" width="158" height="14" uuid="7567b038-4b39-4a33-8931-3bea942ca266"/>
+					<textElement verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Lien avec l'assuré(e): " + $F{lien}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="59" width="158" height="14" uuid="f8df7c35-c07c-483f-9988-0f6f5dc2f99c"/>
+					<textElement verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Né(e) le : " + new SimpleDateFormat("dd/MM/yyyy").format($F{date_naiss_ayant_droit})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="71" width="158" height="14" uuid="4f3a32fa-0287-4dfe-b200-e206e5410928"/>
+					<textElement verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Age : " + (int) Math.floor($F{age}) + " ans"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="55" y="80" width="99" height="17" uuid="1d038cd6-bc7a-49a3-b460-87d7f5869a58"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[N°Assuré(e) :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="131" y="84" width="50" height="14" forecolor="#F02724" uuid="37f84f7d-e1f2-41c1-a08e-74e8cd2e4249"/>
+					<textElement>
+						<font size="9" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" "+$F{matricule}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="32" y="93" width="144" height="14" uuid="39dd566b-599a-456f-b2f1-f174138bb670"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Nom : " +$F{nom_ad}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="32" y="105" width="144" height="14" uuid="a7aece65-106d-4f8c-9078-2d8dfc6fe3f4"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Prénom : " +$F{prenom_ad}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="-3" y="73" width="53" height="45" uuid="f5c6664f-a021-455c-be85-3ebc51f213dc"/>
+					<imageExpression><![CDATA["signatures.png"]]></imageExpression>
+				</image>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

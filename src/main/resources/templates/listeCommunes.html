@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body >
+	<div th:fragment="page_content">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="panel card panel-fill menu_vertical">
+					<div class="card-header" style="padding-left: 20px;">
+						<h5 class="font-16 m-1">Référentiel</h5>
+					</div>
+					<div class="card-body">
+						<div class="accordion" id="accordionExample">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+										<span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"><i class="fas fa-angle-right "></i> Découpage administratif</span>									
+								</div>
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+										<ul style="list-style: none;">
+											<li><a href="#">Région</a></li>
+											<li><a href="#">Département</a></li>
+											<li><a href="#">Commune</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+										<span.0 class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"><i class="fas fa-angle-right "></i> Intervenant</button>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+									<div class="card-body">
+										<div class="mb-4">
+											<strong>Full Name</strong>
+											<br>
+											<p class="text-muted">Johnathan Deo</p>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div class="alert alert-icon alert-success text-success alert-dismissible fade show" role="alert">
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+                   <i class="mdi mdi-check-all mr-2"></i>
+                   <strong>Well done!</strong> You successfully read this important alert message.
+               </div>
+				<ul class="nav nav-tabs tabs-bordered">
+					<li class="nav-item">
+						<a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
+							Profile
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
+							Settings
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home-b1">
+						<div class="panel card panel-fill">
+							<div class="card-header" style="padding-left: 20px;">
+								<h5 class="font-16 m-1">Biography</h5>
+							</div>
+							<div class="card-body">
+								<form action="#" class="form-validation">
+									<div class="form-group">
+										<label for="userName">User Name<span class="text-danger">*</span></label>
+										<input type="text" name="nick" required class="form-control">
+										<small class="text-danger">Please correct the error</small>
+									</div>
+									<div class="form-group">
+										<label for="userName">User Name<span class="text-danger">*</span></label>
+										<select class="form-control" data-live-search="true">
+											<option value="one">First</option>
+											<option value="three">Third</option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										 <p>File style with button style</p>
+										 <input type="file" class="filestyle" data-btnClass="btn-primary">
+									 </div>
+									 
+									 <div class="form-group">
+										 <input type="text" value="Amsterdam,Washington,Sydney" data-role="tagsinput" />
+									 </div>
+									
+									
+									<div class="form-group">
+										<label for="emailAddress">Email address<span class="text-danger">*</span></label>
+										<input type="email" name="email" parsley-trigger="change" required placeholder="Enter email" class="form-control" id="emailAddress">
+									</div>
+									<div class="form-group">
+										<label for="pass1">Password<span class="text-danger">*</span></label>
+										<input id="pass1" type="password" placeholder="Password" required class="form-control">
+									</div>
+									<div class="form-group">
+										<label for="passWord2">Confirm Password <span class="text-danger">*</span></label>
+										<input data-parsley-equalto="#pass1" type="password" required placeholder="Password" class="form-control" id="passWord2">
+									</div>
+									<div class="form-group text-right mb-0">
+										<button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+											Submit
+										</button>
+										<button type="reset" class="btn btn-danger waves-effect">
+											Cancel
+										</button>
+									</div>
+			
+								</form>
+							</div>
+						</div>
+						
+					</div>
+					<div class="tab-pane" id="profile-b1">
+						<div class="panel card panel-fill">
+							<div class="card-header" style="padding-left: 20px;">
+								<h5 class="font-16 m-1">Liste des communes</h5>
+							</div>
+							<div class="card-body">
+								 <table id="key-table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Position</th>
+											<th>Office</th>
+											<th>Age</th>
+											<th>Start date</th>
+											<th>Salary</th>
+										</tr>
+									</thead>
+				
+									<tbody>
+										<tr>
+											<td>Tiger Nixon</td>
+											<td>System Architect</td>
+											<td>Edinburgh</td>
+											<td>61</td>
+											<td>2011/04/25</td>
+											<td>$320,800</td>
+										</tr>
+										<tr>
+											<td>Garrett Winters</td>
+											<td>Accountant</td>
+											<td>Tokyo</td>
+											<td>63</td>
+											<td>2011/07/25</td>
+											<td>$170,750</td>
+										</tr>
+										<tr>
+											<td>Ashton Cox</td>
+											<td>Junior Technical Author</td>
+											<td>San Francisco</td>
+											<td>66</td>
+											<td>2009/01/12</td>
+											<td>$86,000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

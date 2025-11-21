@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body >
+	<div th:fragment="page_content">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="panel card panel-fill menu_vertical">
+					<div class="card-header" style="padding-left: 20px;">
+						<h5 class="font-16 m-1" th:text="#{referentiel}">
+						</h5>
+					</div>
+					<div class="card-body">
+						<div class="accordion" id="accordionExample">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+										<span class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"><i class="fas fa-angle-right "></i> <span th:text="#{decoupageAdministratif}"></span></span>									
+								</div>
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+										<ul style="list-style: none;">
+											<li><a href="#" th:text="#{region}"></a></li>
+											<li><a href="#" th:text="#{departement}"></a></li>
+											<li><a href="#" th:text="#{commune}"></a></li>
+											<li><a href="#" th:text="#{localite}"></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+										<span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"><i class="fas fa-angle-right "></i> <span th:text="#{intervenant}"></span></span>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+									<div class="card-body">
+										<ul style="list-style: none;">
+											<li><a href="#" th:text="#{region}"></a></li>
+											<li><a href="#" th:text="#{departement}"></a></li>
+											<li><a href="#" th:text="#{commune}"></a></li>
+											<li><a href="#" th:text="#{localite}"></a></li>
+										</ul>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div th:if = "${operationStatus}"> 
+					<div th:replace="${operationStatus} :: operationStatus"> </div>
+				</div>
+				<ul class="nav nav-tabs tabs-bordered">
+					<li class="nav-item">
+						<a href="#tab_form" data-toggle="tab" aria-expanded="false" class="nav-link active" th:text="#{region.ajoutRegion}"></a>
+					</li>
+					<li class="nav-item">
+						<a href="#tab_list" data-toggle="tab" aria-expanded="true" class="nav-link" th:text="#{region.afficherRegion}"></a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_form">
+						<div class="panel card panel-fill">
+							<div class="card-header" style="padding-left: 20px;">
+								<h5 class="font-16 m-1" th:text="#{region}"></h5>
+							</div>
+							<div class="card-body">
+								<form  class="form-validation" th:object="${regionForm}" method="post">
+									<div class="form-group">
+										<label for="codeRegion" th:text="#{region.codeRegion}"> <span class="text-danger">*</span></label>
+										<input type="text" th:field="*{codeRegion}" required class="form-control" th:classappend="${#fields.hasErrors('codeRegion')} ? 'border-danger'">
+										<small class="text-danger" th:if="${#fields.hasErrors('codeRegion')}" th:errors="*{codeRegion}"> </small>
+										
+									</div>
+									<div class="form-group">
+										<label for="nomRegion" th:text="#{region.nomRegion}"> <span class="text-danger">*</span></label>
+										<input type="text" th:field="*{nomRegion}" required class="form-control" th:classappend="${#fields.hasErrors('nomRegion')} ? 'border-danger'">
+										<small class="text-danger" th:if="${#fields.hasErrors('nomRegion')}" th:errors="*{nomRegion}"></small>
+									</div>
+									
+									<div class="form-group text-right mb-0">
+										<button class="btn btn-primary waves-effect waves-light mr-1" type="submit" th:text="#{btn.valider}"></button>
+										<button type="reset" class="btn btn-danger waves-effect" th:text="#{btn.annuler}"></button>
+									</div>
+			
+								</form>
+							</div>
+						</div>
+						
+					</div>
+					<div class="tab-pane" id="tab_list">
+						<div class="panel card panel-fill">
+							<div class="card-header" style="padding-left: 20px;">
+								<b class="font-16" th:text="#{region.listeRegion}"></b>
+								<a href="#" class="btn btn-sm btn-primary float-right"><i class="mdi mdi-file-import-outline "></i> Import</a>
+								<a href="#" class="btn btn-sm btn-primary float-right"><i class="mdi mdi-file-export-outline"></i> Export</a>
+							</div>
+							<div class="card-body">
+								 <table id="key-table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+									<thead>
+										<tr>
+											<th th:text="#{region.codeRegion}"></th>
+											<th th:text="#{region.nomRegion}"></th>
+											<th th:text="#{action}"></th>
+										</tr>
+									</thead>
+				
+									<tbody>
+										<tr th:each="region : ${regions}">
+											<td th:text="${region.codeRegion}"></td>
+											<td th:text="${region.nomRegion}"></td>
+											<td align="center" style="width:20px"> 
+												<a href="#" class="btn btn-primary btn-xs"><i class="mdi mdi-pencil "></i> Modifier</a>
+												<a href="#" class="btn btn-danger btn-xs"><i class="mdi mdi-trash-can-outline "></i>Supprimer</a>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
