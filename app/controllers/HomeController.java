@@ -17,6 +17,7 @@ import play.db.Database;
 import play.mvc.*;
 import play.mvc.Http.Request;
 import services.AdherentMainServices;
+import services.DashboardService;
 import services.ParamsServices;
 import utils.Login;
 
@@ -30,13 +31,15 @@ public class HomeController extends Controller {
 	FormFactory formatFactory;
 	AdherentMainServices consultationServices;
 	ParamsServices paramsService;
+	DashboardService dashboardService;
 	
 	@Inject
-	public HomeController(FormFactory formatFactory, AdherentMainServices consultationServices,ParamsServices paramsService) {
+	public HomeController(FormFactory formatFactory, AdherentMainServices consultationServices, ParamsServices paramsService, DashboardService dashboardService) {
 
 		this.formatFactory = formatFactory;
 		this.consultationServices = consultationServices;
 		this.paramsService = paramsService;
+		this.dashboardService = dashboardService;
 		
 
 	}
@@ -54,9 +57,15 @@ public class HomeController extends Controller {
 		if (request.session().get("login") == null) {
 			return ok(views.html.index.render(paramsService.listesParams(),request));
 		} else {
+			// Récupérer la gestion depuis la session
+			String gestion = request.session().get("gestion").orElse("2024");
+			
+			// Récupérer les données du dashboard
+			Long totalAdherents = dashboardService.countAdherents();
+			Long totalAyantsDroit = dashboardService.countAyantsDroit();
 			
 			// System.out.println("les elemensts sont :" + element);
-			return ok(views.html.acceuil.render(request));
+			return ok(views.html.acceuil.render(totalAdherents, totalAyantsDroit, gestion, dashboardService, request));
 		}
 	}
 	/**
