@@ -208,6 +208,16 @@
 </div>
 
 <script type="text/javascript">
+// S'assurer que jQuery est chargé
+if (typeof jQuery === 'undefined') {
+    console.error('jQuery n\'est pas chargé!');
+}
+
+// S'assurer que Highcharts est chargé
+if (typeof Highcharts === 'undefined') {
+    console.error('Highcharts n\'est pas chargé!');
+}
+
 $(document).ready(function() {
 	// Initialiser DataTables pour les tableaux
 	$('#tableStructure, #tablePrestation').DataTable({
@@ -222,11 +232,11 @@ $(document).ready(function() {
 	// Données pour le graphique des structures
 	var structureData = [
 		@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
-			@for(structure <- structures) {
+			@for((structure, index) <- structures.zipWithIndex) {
 				{
 					name: '@structure.getStructure()',
 					y: @structure.getTotalAnnuel().doubleValue()
-				},
+				}@if(index < structures.size() - 1) {,}
 			}
 		}
 	];
@@ -234,14 +244,30 @@ $(document).ready(function() {
 	// Données pour le graphique des prestations
 	var prestationData = [
 		@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
-			@for(prestation <- prestations) {
+			@for((prestation, index) <- prestations.zipWithIndex) {
 				{
 					name: '@prestation.getPrestation()',
 					y: @prestation.getTotalAnnuel().doubleValue()
-				},
+				}@if(index < prestations.size() - 1) {,}
 			}
 		}
 	];
+
+	// Debug - Afficher les données
+	console.log('Structure Data:', structureData);
+	console.log('Prestation Data:', prestationData);
+
+	// Vérifier que Highcharts est chargé
+	if (typeof Highcharts === 'undefined') {
+		console.error('Highcharts n\'est pas chargé!');
+		return;
+	}
+
+	// Vérifier que les conteneurs existent
+	if ($('#chartStructure').length === 0 || $('#chartPrestation').length === 0) {
+		console.error('Les conteneurs de graphiques n\'existent pas!');
+		return;
+	}
 
 	// Configuration responsive pour Highcharts
 	var responsiveOptions = {
@@ -260,7 +286,8 @@ $(document).ready(function() {
 	};
 
 	// Graphique Règlements par Structure
-	Highcharts.chart('chartStructure', {
+	try {
+		Highcharts.chart('chartStructure', {
 		chart: {
 			type: 'column'
 		},
@@ -297,9 +324,13 @@ $(document).ready(function() {
 		}],
 		responsive: responsiveOptions.responsive
 	});
+	} catch(e) {
+		console.error('Erreur lors de la création du graphique Structure:', e);
+	}
 
 	// Graphique Règlements par Type de Prestation
-	Highcharts.chart('chartPrestation', {
+	try {
+		Highcharts.chart('chartPrestation', {
 		chart: {
 			type: 'pie'
 		},
@@ -329,6 +360,9 @@ $(document).ready(function() {
 		}],
 		responsive: responsiveOptions.responsive
 	});
+	} catch(e) {
+		console.error('Erreur lors de la création du graphique Prestation:', e);
+	}
 });
 </script>
   
