@@ -207,163 +207,33 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-// S'assurer que jQuery est chargé
-if (typeof jQuery === 'undefined') {
-    console.error('jQuery n\'est pas chargé!');
-}
-
-// S'assurer que Highcharts est chargé
-if (typeof Highcharts === 'undefined') {
-    console.error('Highcharts n\'est pas chargé!');
-}
-
-$(document).ready(function() {
-	// Initialiser DataTables pour les tableaux
-	$('#tableStructure, #tablePrestation').DataTable({
-		"language": {
-			"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
-		},
-		"order": [[1, "desc"]],
-		"pageLength": 10,
-		"responsive": true
-	});
-
-	// Données pour le graphique des structures
-	var structureData = [
-		@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
-			@for((structure, index) <- structures.zipWithIndex) {
-				{
-					name: '@structure.getStructure()',
-					y: @structure.getTotalAnnuel().doubleValue()
-				}@if(index < structures.size() - 1) {,}
-			}
+<!-- Données pour les graphiques (format JSON) -->
+<script type="application/json" id="dashboardStructureData">
+[
+	@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
+		@for((structure, index) <- structures.zipWithIndex) {
+			{
+				"name": "@structure.getStructure()",
+				"y": @structure.getTotalAnnuel().doubleValue()
+			}@if(index < structures.size() - 1) {,}
 		}
-	];
-
-	// Données pour le graphique des prestations
-	var prestationData = [
-		@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
-			@for((prestation, index) <- prestations.zipWithIndex) {
-				{
-					name: '@prestation.getPrestation()',
-					y: @prestation.getTotalAnnuel().doubleValue()
-				}@if(index < prestations.size() - 1) {,}
-			}
-		}
-	];
-
-	// Debug - Afficher les données
-	console.log('Structure Data:', structureData);
-	console.log('Prestation Data:', prestationData);
-
-	// Vérifier que Highcharts est chargé
-	if (typeof Highcharts === 'undefined') {
-		console.error('Highcharts n\'est pas chargé!');
-		return;
 	}
-
-	// Vérifier que les conteneurs existent
-	if ($('#chartStructure').length === 0 || $('#chartPrestation').length === 0) {
-		console.error('Les conteneurs de graphiques n\'existent pas!');
-		return;
-	}
-
-	// Configuration responsive pour Highcharts
-	var responsiveOptions = {
-		responsive: {
-			rules: [{
-				condition: {
-					maxWidth: 500
-				},
-				chartOptions: {
-					legend: {
-						enabled: false
-					}
-				}
-			}]
-		}
-	};
-
-	// Graphique Règlements par Structure
-	try {
-		Highcharts.chart('chartStructure', {
-		chart: {
-			type: 'column'
-		},
-		title: {
-			text: 'Répartition des Règlements par Structure'
-		},
-		xAxis: {
-			type: 'category',
-			labels: {
-				rotation: -45,
-				style: {
-					fontSize: '11px'
-				}
-			}
-		},
-		yAxis: {
-			title: {
-				text: 'Montant (FCFA)'
-			}
-		},
-		legend: {
-			enabled: false
-		},
-		tooltip: {
-			pointFormat: '<b>{point.y:,.0f} FCFA</b>'
-		},
-		series: [{
-			name: 'Montant',
-			data: structureData,
-			dataLabels: {
-				enabled: false
-			},
-			colorByPoint: true
-		}],
-		responsive: responsiveOptions.responsive
-	});
-	} catch(e) {
-		console.error('Erreur lors de la création du graphique Structure:', e);
-	}
-
-	// Graphique Règlements par Type de Prestation
-	try {
-		Highcharts.chart('chartPrestation', {
-		chart: {
-			type: 'pie'
-		},
-		title: {
-			text: 'Répartition par Type de Prestation'
-		},
-		tooltip: {
-			pointFormat: '<b>{point.y:,.0f} FCFA</b> ({point.percentage:.1f}%)'
-		},
-		plotOptions: {
-			pie: {
-				allowPointSelect: true,
-				cursor: 'pointer',
-				dataLabels: {
-					enabled: true,
-					format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					style: {
-						fontSize: '11px'
-					}
-				}
-			}
-		},
-		series: [{
-			name: 'Montant',
-			colorByPoint: true,
-			data: prestationData
-		}],
-		responsive: responsiveOptions.responsive
-	});
-	} catch(e) {
-		console.error('Erreur lors de la création du graphique Prestation:', e);
-	}
-});
+]
 </script>
+
+<script type="application/json" id="dashboardPrestationData">
+[
+	@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
+		@for((prestation, index) <- prestations.zipWithIndex) {
+			{
+				"name": "@prestation.getPrestation()",
+				"y": @prestation.getTotalAnnuel().doubleValue()
+			}@if(index < prestations.size() - 1) {,}
+		}
+	}
+]
+</script>
+
+<!-- Le script dashboard.js (chargé dans main.scala.html) initialisera automatiquement les graphiques -->
   
 }
