@@ -213,7 +213,7 @@
 	@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
 		@for((structure, index) <- structures.zipWithIndex) {
 			{
-				"name": "@structure.getStructure()",
+				"name": "@{structure.getStructure().replaceAll("\"", "\\\\\"").replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t", " ")}",
 				"y": @structure.getTotalAnnuel().doubleValue()
 			}@if(index < structures.size() - 1) {,}
 		}
@@ -226,7 +226,7 @@
 	@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
 		@for((prestation, index) <- prestations.zipWithIndex) {
 			{
-				"name": "@prestation.getPrestation()",
+				"name": "@{prestation.getPrestation().replaceAll("\"", "\\\\\"").replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t", " ")}",
 				"y": @prestation.getTotalAnnuel().doubleValue()
 			}@if(index < prestations.size() - 1) {,}
 		}

@@ -45,17 +45,33 @@ $(document).ready(function() {
         var structureJson = structureDataElement.text();
         var prestationJson = prestationDataElement.text();
         
-        if (structureJson) {
-            structureData = JSON.parse(structureJson);
-            console.log('Structure Data chargées:', structureData);
+        console.log('JSON Structure brut (premiers 200 chars):', structureJson.substring(0, 200));
+        console.log('JSON Prestation brut (premiers 200 chars):', prestationJson.substring(0, 200));
+        
+        if (structureJson && structureJson.trim() !== '') {
+            try {
+                structureData = JSON.parse(structureJson);
+                console.log('Structure Data chargées:', structureData.length, 'éléments', structureData);
+            } catch(e) {
+                console.error('Erreur parsing Structure JSON:', e);
+                console.error('JSON problématique:', structureJson);
+                // Essayer de trouver la position de l'erreur
+                var lines = structureJson.split('\n');
+                console.error('Ligne problématique (environ):', lines[Math.min(45, lines.length - 1)]);
+            }
         }
         
-        if (prestationJson) {
-            prestationData = JSON.parse(prestationJson);
-            console.log('Prestation Data chargées:', prestationData);
+        if (prestationJson && prestationJson.trim() !== '') {
+            try {
+                prestationData = JSON.parse(prestationJson);
+                console.log('Prestation Data chargées:', prestationData.length, 'éléments', prestationData);
+            } catch(e) {
+                console.error('Erreur parsing Prestation JSON:', e);
+                console.error('JSON problématique:', prestationJson);
+            }
         }
     } catch(e) {
-        console.error('Erreur parsing JSON:', e);
+        console.error('Erreur générale parsing JSON:', e);
         return;
     }
     
