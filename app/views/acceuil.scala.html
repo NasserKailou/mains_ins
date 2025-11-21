@@ -15,15 +15,15 @@
 	<!-- Cartes de statistiques principales -->
 	<div class="row">
 		<!-- Total Adhérents -->
-		<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-			<div class="card dashboard-card bg-primary text-white">
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-primary text-white">
 				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-4">
+					<div class="row">
+						<div class="col-xs-4">
 							<i class="fas fa-users stat-icon"></i>
 						</div>
-						<div class="col-8 text-right">
-							<h5 class="card-title mb-0">Adhérents</h5>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Adhérents</h5>
 							<div class="stat-number">@totalAdherents</div>
 							<small>Adhérents actifs</small>
 						</div>
@@ -33,15 +33,15 @@
 		</div>
 
 		<!-- Total Ayants Droit -->
-		<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-			<div class="card dashboard-card bg-success text-white">
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-success text-white">
 				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-4">
+					<div class="row">
+						<div class="col-xs-4">
 							<i class="fas fa-user-friends stat-icon"></i>
 						</div>
-						<div class="col-8 text-right">
-							<h5 class="card-title mb-0">Ayants Droit</h5>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Ayants Droit</h5>
 							<div class="stat-number">@totalAyantsDroit</div>
 							<small>Bénéficiaires</small>
 						</div>
@@ -51,15 +51,15 @@
 		</div>
 
 		<!-- Total Bénéficiaires -->
-		<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-			<div class="card dashboard-card bg-info text-white">
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-info text-white">
 				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-4">
+					<div class="row">
+						<div class="col-xs-4">
 							<i class="fas fa-user-check stat-icon"></i>
 						</div>
-						<div class="col-8 text-right">
-							<h5 class="card-title mb-0">Total</h5>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Total</h5>
 							<div class="stat-number">@{totalAdherents + totalAyantsDroit}</div>
 							<small>Bénéficiaires totaux</small>
 						</div>
@@ -69,15 +69,15 @@
 		</div>
 
 		<!-- Structures Partenaires -->
-		<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-			<div class="card dashboard-card bg-warning text-white">
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-warning text-white">
 				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-4">
+					<div class="row">
+						<div class="col-xs-4">
 							<i class="fas fa-hospital stat-icon"></i>
 						</div>
-						<div class="col-8 text-right">
-							<h5 class="card-title mb-0">Structures</h5>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Structures</h5>
 							<div class="stat-number">@{dashboardService.getCumuleByStructure(gestion).size()}</div>
 							<small>Partenaires actifs</small>
 						</div>
@@ -88,26 +88,26 @@
 	</div>
 
 	<!-- Graphiques -->
-	<div class="row mt-4">
+	<div class="row" style="margin-top: 30px;">
 		<!-- Règlements par Structure -->
-		<div class="col-xl-6 col-lg-12 col-md-12">
-			<div class="card dashboard-card">
-				<div class="card-header bg-primary text-white">
-					<h5 class="mb-0"><i class="fas fa-chart-bar"></i> Règlements par Structure</h5>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<div class="panel panel-primary dashboard-card">
+				<div class="panel-heading bg-primary text-white">
+					<h3 class="panel-title"><i class="fas fa-chart-bar"></i> Règlements par Structure</h3>
 				</div>
-				<div class="card-body">
+				<div class="panel-body">
 					<div id="chartStructure" class="chart-container"></div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Règlements par Type de Prestation -->
-		<div class="col-xl-6 col-lg-12 col-md-12">
-			<div class="card dashboard-card">
-				<div class="card-header bg-success text-white">
-					<h5 class="mb-0"><i class="fas fa-chart-pie"></i> Règlements par Type de Prestation</h5>
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<div class="panel panel-success dashboard-card">
+				<div class="panel-heading bg-success text-white">
+					<h3 class="panel-title"><i class="fas fa-chart-pie"></i> Règlements par Type de Prestation</h3>
 				</div>
-				<div class="card-body">
+				<div class="panel-body">
 					<div id="chartPrestation" class="chart-container"></div>
 				</div>
 			</div>
@@ -115,17 +115,17 @@
 	</div>
 
 	<!-- Tableau détaillé des règlements par structure -->
-	<div class="row mt-4">
-		<div class="col-12">
-			<div class="card dashboard-card">
-				<div class="card-header bg-info text-white">
-					<h5 class="mb-0"><i class="fas fa-table"></i> Détail des Règlements par Structure - @gestion</h5>
+	<div class="row" style="margin-top: 30px;">
+		<div class="col-xs-12">
+			<div class="panel panel-info dashboard-card">
+				<div class="panel-heading bg-info text-white">
+					<h3 class="panel-title"><i class="fas fa-table"></i> Détail des Règlements par Structure - @gestion</h3>
 				</div>
-				<div class="card-body">
+				<div class="panel-body">
 					<div class="table-responsive">
-						<table class="table table-striped table-hover" id="tableStructure">
-							<thead class="thead-dark">
-								<tr>
+						<table class="table table-striped table-hover table-bordered" id="tableStructure">
+							<thead>
+								<tr class="bg-primary text-white">
 									<th>Structure</th>
 									<th class="text-right">Montant Total (FCFA)</th>
 									<th class="text-right">Pourcentage</th>
@@ -139,13 +139,13 @@
 												<td><strong>@structure.getStructure()</strong></td>
 												<td class="text-right">@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(structure.getTotalAnnuel())}</td>
 												<td class="text-right">
-													<span class="badge badge-primary">
+													<span class="label label-primary">
 														@{f"${(structure.getTotalAnnuel().doubleValue() / totalGlobal) * 100}%.2f"}%
 													</span>
 												</td>
 											</tr>
 										}
-										<tr class="table-info font-weight-bold">
+										<tr class="info">
 											<td><strong>TOTAL</strong></td>
 											<td class="text-right"><strong>@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(totalGlobal)}</strong></td>
 											<td class="text-right"><strong>100%</strong></td>
@@ -161,17 +161,17 @@
 	</div>
 
 	<!-- Tableau détaillé des règlements par type de prestation -->
-	<div class="row mt-4">
-		<div class="col-12">
-			<div class="card dashboard-card">
-				<div class="card-header bg-warning text-white">
-					<h5 class="mb-0"><i class="fas fa-table"></i> Détail des Règlements par Type de Prestation - @gestion</h5>
+	<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+		<div class="col-xs-12">
+			<div class="panel panel-warning dashboard-card">
+				<div class="panel-heading bg-warning text-white">
+					<h3 class="panel-title"><i class="fas fa-table"></i> Détail des Règlements par Type de Prestation - @gestion</h3>
 				</div>
-				<div class="card-body">
+				<div class="panel-body">
 					<div class="table-responsive">
-						<table class="table table-striped table-hover" id="tablePrestation">
-							<thead class="thead-dark">
-								<tr>
+						<table class="table table-striped table-hover table-bordered" id="tablePrestation">
+							<thead>
+								<tr class="bg-success text-white">
 									<th>Type de Prestation</th>
 									<th class="text-right">Montant Total (FCFA)</th>
 									<th class="text-right">Pourcentage</th>
@@ -185,13 +185,13 @@
 												<td><strong>@prestation.getPrestation()</strong></td>
 												<td class="text-right">@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(prestation.getTotalAnnuel())}</td>
 												<td class="text-right">
-													<span class="badge badge-success">
+													<span class="label label-success">
 														@{f"${(prestation.getTotalAnnuel().doubleValue() / totalGlobal) * 100}%.2f"}%
 													</span>
 												</td>
 											</tr>
 										}
-										<tr class="table-warning font-weight-bold">
+										<tr class="warning">
 											<td><strong>TOTAL</strong></td>
 											<td class="text-right"><strong>@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(totalGlobal)}</strong></td>
 											<td class="text-right"><strong>100%</strong></td>
@@ -215,7 +215,8 @@ $(document).ready(function() {
 			"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
 		},
 		"order": [[1, "desc"]],
-		"pageLength": 10
+		"pageLength": 10,
+		"responsive": true
 	});
 
 	// Données pour le graphique des structures
@@ -241,6 +242,22 @@ $(document).ready(function() {
 			}
 		}
 	];
+
+	// Configuration responsive pour Highcharts
+	var responsiveOptions = {
+		responsive: {
+			rules: [{
+				condition: {
+					maxWidth: 500
+				},
+				chartOptions: {
+					legend: {
+						enabled: false
+					}
+				}
+			}]
+		}
+	};
 
 	// Graphique Règlements par Structure
 	Highcharts.chart('chartStructure', {
@@ -277,7 +294,8 @@ $(document).ready(function() {
 				enabled: false
 			},
 			colorByPoint: true
-		}]
+		}],
+		responsive: responsiveOptions.responsive
 	});
 
 	// Graphique Règlements par Type de Prestation
@@ -297,7 +315,10 @@ $(document).ready(function() {
 				cursor: 'pointer',
 				dataLabels: {
 					enabled: true,
-					format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+					format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+					style: {
+						fontSize: '11px'
+					}
 				}
 			}
 		},
@@ -305,7 +326,8 @@ $(document).ready(function() {
 			name: 'Montant',
 			colorByPoint: true,
 			data: prestationData
-		}]
+		}],
+		responsive: responsiveOptions.responsive
 	});
 });
 </script>

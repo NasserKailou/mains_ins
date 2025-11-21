@@ -1,0 +1,349 @@
+/* Dashboard Responsive Styles */
+
+/* Images adhérents */
+.adherantImage {
+    height: 35px;
+    width: 35px;
+    transition: all 0.3s ease;
+}
+
+.adherantImage:hover {
+    height: 150px;
+    width: 150px;
+    transform: scale(1.1);
+}
+
+/* Styles généraux du dashboard */
+body {
+    background-color: #f8f9fa;
+}
+
+.container-fluid {
+    padding: 15px;
+}
+
+/* En-tête de page */
+.page-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #007bff;
+}
+
+.page-header h2 {
+    color: #333;
+    font-weight: bold;
+}
+
+.page-header .text-muted {
+    color: #6c757d !important;
+}
+
+/* Cartes du dashboard */
+.dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    min-height: 150px;
+    border: none;
+    overflow: hidden;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card .card-body {
+    padding: 20px;
+}
+
+/* Cards avec background coloré */
+.dashboard-card.bg-primary,
+.dashboard-card.bg-success,
+.dashboard-card.bg-info,
+.dashboard-card.bg-warning {
+    color: white;
+}
+
+.dashboard-card.bg-primary .card-title,
+.dashboard-card.bg-success .card-title,
+.dashboard-card.bg-info .card-title,
+.dashboard-card.bg-warning .card-title {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.dashboard-card.bg-primary small,
+.dashboard-card.bg-success small,
+.dashboard-card.bg-info small,
+.dashboard-card.bg-warning small {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Icônes de statistiques */
+.stat-icon {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    line-height: 1.2;
+}
+
+.dashboard-card .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.dashboard-card small {
+    font-size: 0.85rem;
+}
+
+/* Conteneurs de graphiques */
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Tableaux */
+.table-responsive {
+    margin-top: 10px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* En-têtes de cartes */
+.card-header {
+    padding: 15px 20px;
+    border-bottom: none;
+    font-weight: 600;
+}
+
+.card-header h5 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+/* Styles pour les panels Bootstrap 3 */
+.panel {
+    border: none;
+}
+
+.panel-heading {
+    padding: 15px 20px;
+    border-bottom: none;
+    font-weight: 600;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.panel-body {
+    padding: 20px;
+}
+
+/* Cards personnalisées pour remplacer les panels */
+.dashboard-card.panel {
+    border: none;
+}
+
+/* Badges et Labels Bootstrap 3 */
+.badge {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+}
+
+.label {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+}
+
+.label-primary {
+    background-color: #007bff;
+}
+
+.label-success {
+    background-color: #28a745;
+}
+
+.label-info {
+    background-color: #17a2b8;
+}
+
+.label-warning {
+    background-color: #ffc107;
+}
+
+/* Responsive Design - Tablette */
+@media (max-width: 991px) {
+    .stat-icon {
+        font-size: 2.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .chart-container {
+        height: 350px;
+    }
+    
+    .dashboard-card {
+        min-height: 130px;
+    }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 767px) {
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .chart-container {
+        height: 300px;
+        margin-top: 15px;
+    }
+    
+    .dashboard-card {
+        min-height: 120px;
+        margin-bottom: 15px;
+    }
+    
+    .dashboard-card .card-body {
+        padding: 15px;
+    }
+    
+    .page-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1rem;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Design - Très petit mobile */
+@media (max-width: 575px) {
+    .stat-icon {
+        font-size: 1.8rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-card {
+        min-height: 110px;
+    }
+    
+    .dashboard-card .card-body {
+        padding: 12px;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .page-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .table {
+        font-size: 0.85rem;
+    }
+    
+    .badge {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Amélioration des couleurs de cartes */
+.bg-primary {
+    background-color: #007bff !important;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+/* Alignements */
+.text-right {
+    text-align: right !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+/* Marges et espacements */
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Animation des cartes au chargement */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Délai d'animation pour effet cascade */
+.dashboard-card:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-card:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-card:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-card:nth-child(4) { animation-delay: 0.4s; }
