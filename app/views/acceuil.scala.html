@@ -1,27 +1,239 @@
 @import helper._
 @import java.util
-@(implicit request: Http.Request)
+@import java.text.NumberFormat
+@import java.util.Locale
+@(totalAdherents: Long, totalAyantsDroit: Long, gestion: String, dashboardService: services.DashboardService)(implicit request: Http.Request)
 
-@main("Accueil"){
+@main("Tableau de Bord - Mutuelle INS"){
  
-  <div class="acceuil-containeur"> 
-   	<center> 
-  	<img src="@routes.Assets.versioned("images/logo.jpg")" class="profile-img-card0" 
-   	style="width: 700px;height:550px;  margin-top: 80px;"> 
- 	 </center>       
-	</div> 
- 
-	<forme>
-		<input type="hidden" id="listesID" name="listesID" value=""></input>
-	</forme>
-	
-<!--   <div id="container1" class="col-sm-6" style=" padding-top: 25px"></div> -->
-<!--   <div id="container3" class="col-sm-6 highcharts-figure"></div> -->
-<!--   <div id="container2" class="col-sm-6 highcharts-figure" ></div> -->
-<!--   <div id="container4" class="col-sm-6 highcharts-figure" ></div>  -->
+<div class="container-fluid">
+	<div class="page-header">
+		<h2><i class="fas fa-tachometer-alt"></i> Tableau de Bord - Gestion @gestion</h2>
+		<p class="text-muted">Vue d'ensemble des statistiques de la mutuelle</p>
+	</div>
+
+	<!-- Cartes de statistiques principales -->
+	<div class="row">
+		<!-- Total Adhérents -->
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-primary text-white">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-xs-4">
+							<i class="fas fa-users stat-icon"></i>
+						</div>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Adhérents</h5>
+							<div class="stat-number">@totalAdherents</div>
+							<small>Adhérents actifs</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Total Ayants Droit -->
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-success text-white">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-xs-4">
+							<i class="fas fa-user-friends stat-icon"></i>
+						</div>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Ayants Droit</h5>
+							<div class="stat-number">@totalAyantsDroit</div>
+							<small>Bénéficiaires</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Total Bénéficiaires -->
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-info text-white">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-xs-4">
+							<i class="fas fa-user-check stat-icon"></i>
+						</div>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Total</h5>
+							<div class="stat-number">@{totalAdherents + totalAyantsDroit}</div>
+							<small>Bénéficiaires totaux</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Structures Partenaires -->
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<div class="dashboard-card bg-warning text-white">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-xs-4">
+							<i class="fas fa-hospital stat-icon"></i>
+						</div>
+						<div class="col-xs-8 text-right">
+							<h5 class="card-title">Structures</h5>
+							<div class="stat-number">@{dashboardService.getCumuleByStructure(gestion).size()}</div>
+							<small>Partenaires actifs</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Graphiques -->
+	<div class="row" style="margin-top: 30px;">
+		<!-- Règlements par Structure -->
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<div class="panel panel-primary dashboard-card">
+				<div class="panel-heading bg-primary text-white">
+					<h3 class="panel-title"><i class="fas fa-chart-bar"></i> Règlements par Structure</h3>
+				</div>
+				<div class="panel-body">
+					<div id="chartStructure" class="chart-container"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Règlements par Type de Prestation -->
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+			<div class="panel panel-success dashboard-card">
+				<div class="panel-heading bg-success text-white">
+					<h3 class="panel-title"><i class="fas fa-chart-pie"></i> Règlements par Type de Prestation</h3>
+				</div>
+				<div class="panel-body">
+					<div id="chartPrestation" class="chart-container"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tableau détaillé des règlements par structure -->
+	<div class="row" style="margin-top: 30px;">
+		<div class="col-xs-12">
+			<div class="panel panel-info dashboard-card">
+				<div class="panel-heading bg-info text-white">
+					<h3 class="panel-title"><i class="fas fa-table"></i> Détail des Règlements par Structure - @gestion</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover table-bordered" id="tableStructure">
+							<thead>
+								<tr class="bg-primary text-white">
+									<th>Structure</th>
+									<th class="text-right">Montant Total (FCFA)</th>
+									<th class="text-right">Pourcentage</th>
+								</tr>
+							</thead>
+							<tbody>
+								@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
+									@defining(structures.stream().mapToDouble(s => s.getTotalAnnuel().doubleValue()).sum()) { totalGlobal =>
+										@for(structure <- structures) {
+											<tr>
+												<td><strong>@structure.getStructure()</strong></td>
+												<td class="text-right">@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(structure.getTotalAnnuel())}</td>
+												<td class="text-right">
+													<span class="label label-primary">
+														@{f"${(structure.getTotalAnnuel().doubleValue() / totalGlobal) * 100}%.2f"}%
+													</span>
+												</td>
+											</tr>
+										}
+										<tr class="info">
+											<td><strong>TOTAL</strong></td>
+											<td class="text-right"><strong>@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(totalGlobal)}</strong></td>
+											<td class="text-right"><strong>100%</strong></td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tableau détaillé des règlements par type de prestation -->
+	<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+		<div class="col-xs-12">
+			<div class="panel panel-warning dashboard-card">
+				<div class="panel-heading bg-warning text-white">
+					<h3 class="panel-title"><i class="fas fa-table"></i> Détail des Règlements par Type de Prestation - @gestion</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover table-bordered" id="tablePrestation">
+							<thead>
+								<tr class="bg-success text-white">
+									<th>Type de Prestation</th>
+									<th class="text-right">Montant Total (FCFA)</th>
+									<th class="text-right">Pourcentage</th>
+								</tr>
+							</thead>
+							<tbody>
+								@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
+									@defining(prestations.stream().mapToDouble(p => p.getTotalAnnuel().doubleValue()).sum()) { totalGlobal =>
+										@for(prestation <- prestations) {
+											<tr>
+												<td><strong>@prestation.getPrestation()</strong></td>
+												<td class="text-right">@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(prestation.getTotalAnnuel())}</td>
+												<td class="text-right">
+													<span class="label label-success">
+														@{f"${(prestation.getTotalAnnuel().doubleValue() / totalGlobal) * 100}%.2f"}%
+													</span>
+												</td>
+											</tr>
+										}
+										<tr class="warning">
+											<td><strong>TOTAL</strong></td>
+											<td class="text-right"><strong>@{NumberFormat.getNumberInstance(new Locale("fr", "FR")).format(totalGlobal)}</strong></td>
+											<td class="text-right"><strong>100%</strong></td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Données pour les graphiques (format JSON) -->
+<script type="application/json" id="dashboardStructureData">
+[
+	@defining(dashboardService.getCumuleByStructure(gestion)) { structures =>
+		@for((structure, index) <- structures.zipWithIndex) {
+			{
+				"name": "@{structure.getStructure().replaceAll("\"", "\\\\\"").replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t", " ")}",
+				"y": @structure.getTotalAnnuel().doubleValue()
+			}@if(index < structures.size() - 1) {,}
+		}
+	}
+]
+</script>
+
+<script type="application/json" id="dashboardPrestationData">
+[
+	@defining(dashboardService.getCumuleByTypePrestation(gestion)) { prestations =>
+		@for((prestation, index) <- prestations.zipWithIndex) {
+			{
+				"name": "@{prestation.getPrestation().replaceAll("\"", "\\\\\"").replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t", " ")}",
+				"y": @prestation.getTotalAnnuel().doubleValue()
+			}@if(index < prestations.size() - 1) {,}
+		}
+	}
+]
+</script>
+
+<!-- Le script dashboard.js (chargé dans main.scala.html) initialisera automatiquement les graphiques -->
   
 }
-
-<script type="text/javascript">
-       
-    </script>
